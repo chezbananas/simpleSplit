@@ -10,6 +10,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./styles";
 import {
+  updatePerson,
   handleAddPerson,
   handleRemovePerson,
   handleCalculate,
