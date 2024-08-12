@@ -1,5 +1,5 @@
 {
-  "name": "splitcheckapp",
+  "name": "simplesplit",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@react-native-async-storage/async-storage": "^1.24.0",
     "@react-navigation/native": "^6.0.2",
     "expo": "~51.0.26",
     "expo-constants": "~16.0.2",
