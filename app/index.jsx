@@ -112,7 +112,7 @@ const App = () => {
               style={styles.input}
               placeholder="Pre-tax Amount"
               placeholderTextColor="#888"
-              keyboardType="numeric"
+              keyboardType="decimal-pad" // Allow decimal input
               value={item.preTax}
               onChangeText={(text) =>
                 handlePreTaxInputChange(index, text, people, setPeople)
@@ -135,7 +135,7 @@ const App = () => {
         style={styles.totalInput}
         placeholder="Total After Tax/Tip"
         placeholderTextColor="#888"
-        keyboardType="numeric"
+        keyboardType="decimal-pad"
         value={String(totalAmount)}
         onChangeText={(text) => handleTotalAmountChange(text, setTotalAmount)}
         onSubmitEditing={() =>
