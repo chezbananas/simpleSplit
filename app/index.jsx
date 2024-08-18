@@ -6,6 +6,7 @@ import {
   TextInput,
   Button,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import styles from "./styles";
@@ -27,6 +28,7 @@ const App = () => {
   const [amounts, setAmounts] = useState([]);
   const [warningMessage, setWarningMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [preTaxTotal, setPreTaxTotal] = useState(0); // State to store pre-tax total
 
   useEffect(() => {
     const loadPeopleNames = async () => {
@@ -56,6 +58,22 @@ const App = () => {
     };
 
     savePeopleNames();
+  }, [people]);
+
+  const removePersonAtIndex = (index) => {
+    handleRemovePerson(index, people, setPeople, setNumPeople, setAmounts);
+  };
+
+  const calculatePreTaxTotal = () => {
+    const total = people.reduce(
+      (sum, person) => sum + parseFloat(person.preTax) || 0,
+      0
+    );
+    setPreTaxTotal(total);
+  };
+
+  useEffect(() => {
+    calculatePreTaxTotal();
   }, [people]);
 
   return (
@@ -127,6 +145,16 @@ const App = () => {
                 )
               }
             />
+            <TouchableOpacity
+              style={[
+                styles.removeButton,
+                numPeople <= 1 && styles.disabledButton,
+              ]}
+              onPress={() => removePersonAtIndex(index)}
+              disabled={numPeople <= 1}
+            >
+              <Text style={styles.removeButtonText}>X</Text>
+            </TouchableOpacity>
           </View>
         )}
         keyExtractor={(_, index) => index.toString()}
@@ -164,6 +192,9 @@ const App = () => {
         <Text style={styles.warning}>{warningMessage}</Text>
       ) : null}
       {errorMessage ? <Text style={styles.error}>{errorMessage}</Text> : null}
+      <Text style={styles.preTaxTotal}>
+        Pre-Tax Total: ${preTaxTotal.toFixed(2)}
+      </Text>
       <FlatList
         data={amounts}
         renderItem={({ item, index }) => (

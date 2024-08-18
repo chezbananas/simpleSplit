@@ -65,6 +65,25 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     color: "#fff",
   },
+  removeButton: {
+    backgroundColor: "#ff3333",
+    padding: 5,
+    borderRadius: 5,
+    marginLeft: 10,
+  },
+  disabledButton: {
+    backgroundColor: "#888", // Disabled state for remove button
+  },
+  removeButtonText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  preTaxTotal: {
+    fontSize: 18,
+    marginVertical: 10,
+    color: "#fff",
+    fontWeight: "bold",
+  },
 });
 
 export default styles;

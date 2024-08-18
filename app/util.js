@@ -15,14 +15,23 @@ export const handleAddPerson = (people, setPeople, setNumPeople) => {
 };
 
 export const handleRemovePerson = (
-  numPeople,
+  index,
   people,
   setPeople,
-  setNumPeople
+  setNumPeople,
+  setAmounts
 ) => {
-  if (numPeople > 1) {
-    setPeople(people.slice(0, -1));
-    setNumPeople((prevNumPeople) => prevNumPeople - 1);
+  if (people.length > 1) {
+    const updatedPeople = people.filter((_, i) => i !== index);
+    setPeople(updatedPeople);
+    setNumPeople(updatedPeople.length);
+
+    // Update the amounts array to match the updated people array
+    const updatedAmounts = updatedPeople.map((_, i) => ({
+      amount: 0,
+      percentage: 0,
+    }));
+    setAmounts(updatedAmounts);
   }
 };
 
